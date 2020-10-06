@@ -22,24 +22,3 @@ def logger(func):
         func()
 
     return log_this
-
-
-
-
-
-@logger
-@threader
-def abc():
-    for x in range(10):
-        print("abd")
-
-
-@logger
-@threader
-def nums():
-    for x in range(10):
-        print(123)
-
-
-ori = abc()
-koren = nums()
