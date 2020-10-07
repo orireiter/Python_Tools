@@ -1,2 +1,0 @@
-INFO:root:2020-10-06 11:32:36.356847 attempt to run function named abc
-INFO:root:2020-10-06 11:32:36.361477 attempt to run function named nums
