@@ -28,3 +28,9 @@ def get_conf(*key_list):
     except KeyError:
         return "ERROR: one of the keys given does NOT exist"
     return conf
+
+def fix_json_quotings(string):
+    from json import loads
+    fixed_string = string.replace("'", '"')
+    fixed_json = loads(fixed_string)
+    return(fixed_json)
