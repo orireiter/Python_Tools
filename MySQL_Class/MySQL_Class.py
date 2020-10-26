@@ -380,6 +380,40 @@ class MSQL:
             except:
                 return(f"ERROR: Either you disconnected, or a table named {table_name} doesn't exist, or the columns given don't exist\nExample of use:\nfind_records('test_table', 'name', 'john')")
 
+    def find_all_records(self, table_name: str):
+        '''
+            Finds and returns a record(s) from table given, according to the columns/values given.
+
+            Example of use:
+            find_records('test_table', 'name', 'john')
+
+            Parameters 
+            ----------
+            table_name: str
+                A table to delete from.
+            column: str
+                A column to query by.
+            value: str
+                The value the column should be, to query by,
+
+            Raises
+            ------
+            If a connection can't be established, an error will be returned.
+            If no DB is specified, an error will be returned.
+        '''
+        if self.database_name == None:
+            return("ERROR: No Database Defined, either add it upon initializing the object,\nOr by self.database_name='example' \nAnd apply it by executing reconnect()")
+        else:
+            try:
+                sql_line = f"select * from {table_name}"
+
+                self.cursor.execute(sql_line)
+
+                result = self.cursor.fetchall()
+                return({"Records": result})
+            except:
+                return(f"ERROR: Either you disconnected, or a table named {table_name} doesn't exist, or the columns given don't exist\nExample of use:\nfind_records('test_table', 'name', 'john')")
+
     def update_record(self, table_name: str, columns: tuple, values: tuple, record_id: str):
         '''
             Update a record from table given, according to the columns/values given.

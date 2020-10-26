@@ -105,10 +105,12 @@ class Rabbit:
                         It will inform the the user.
             '''
             
+            self.host = host
+            self.credentials = credentials
             if credentials == None:
-                  self.rabbit_parameters = pika.ConnectionParameters(host)
+                  self.rabbit_parameters = pika.ConnectionParameters(self.host)
             else:
-                  self.rabbit_parameters = pika.ConnectionParameters(host=host,credentials=credentials)
+                  self.rabbit_parameters = pika.ConnectionParameters(host=self.host, credentials=self.credentials)
             
             try:
                   self.connection = pika.BlockingConnection(parameters=self.rabbit_parameters)
@@ -302,7 +304,8 @@ class Rabbit:
             try:
                   self.declare_queue(queue_name, True)
             except:
-                  return(f"ERROR: Queue named {queue_name} not found. \n       Consider declaring it first.")
+                  self.__init__(host=self.host,credentials=self.credentials)
+                  #return(f"ERROR: Queue named {queue_name} not found. \n       Consider declaring it first.")
 
             self.response = None
             self.msg_id = str(uuid.uuid4())
