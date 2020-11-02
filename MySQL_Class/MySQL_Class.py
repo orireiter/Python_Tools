@@ -341,7 +341,7 @@ class MSQL:
 
                 self.cursor.execute(sql_line, value)
                 result = self.cursor.fetchone()
-                return({"Record": result})
+                return(list(result))
             except:
                 return(f"ERROR: Either you disconnected, or a table named {table_name} doesn't exist\nExample of use:\nfind_record('test_table', 12345)")
 
@@ -376,7 +376,7 @@ class MSQL:
                 self.cursor.execute(sql_line, value)
 
                 result = self.cursor.fetchall()
-                return({"Records": result})
+                return(result)
             except:
                 return(f"ERROR: Either you disconnected, or a table named {table_name} doesn't exist, or the columns given don't exist\nExample of use:\nfind_records('test_table', 'name', 'john')")
 
@@ -410,7 +410,7 @@ class MSQL:
                 self.cursor.execute(sql_line)
 
                 result = self.cursor.fetchall()
-                return({"Records": result})
+                return(result)
             except:
                 return(f"ERROR: Either you disconnected, or a table named {table_name} doesn't exist, or the columns given don't exist\nExample of use:\nfind_records('test_table', 'name', 'john')")
 
